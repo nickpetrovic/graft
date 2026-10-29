@@ -1,0 +1,129 @@
+{
+  "revision": 1,
+  "id": "totk",
+  "name": "Tears of the Kingdom",
+  "titleId": "0100F2C0115B6000",
+  "updateTitleId": "0100F2C0115B6800",
+  "macNativeGamesFolder": "totk",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.totk"
+  },
+  "dataFolder": "TOTK",
+  "workFolder": "TOTK_build",
+  "workTree": "totk",
+  "log": {
+    "file": "totk",
+    "linePrefix": "[totk]",
+    "enableVariable": "TOTK_DEBUG_LOG"
+  },
+  "versionFolders": {
+    "prefix": "v",
+    "exceptions": {
+      "1.0.0": "v0"
+    }
+  },
+  "mods": {
+    "engine": "tksharp",
+    "buildScript": "build_app.py",
+    "manifestScript": "games/totk/scripts/make_mod_manifest.py",
+    "patchSitesScript": "games/totk/scripts/patch_sites.py",
+    "codeMods": {
+      "launchVariable": "TOTK_PCHTXT",
+      "heapTable": "System/HeapSize/Product.Nin_NX_NVN.HeapDef.byml.zs",
+      "heapRecord": "romfs-patches-out/2560x1440/overlay.json",
+      "buildIdFile": "exefs/main.build-id"
+    },
+    "titleText": true,
+    "languages": [
+      {
+        "code": "USen",
+        "name": "English (United States)"
+      },
+      {
+        "code": "EUen",
+        "name": "English (United Kingdom)"
+      },
+      {
+        "code": "EUfr",
+        "name": "French (France)"
+      },
+      {
+        "code": "USfr",
+        "name": "French (Canada)"
+      },
+      {
+        "code": "EUes",
+        "name": "Spanish (Spain)"
+      },
+      {
+        "code": "USes",
+        "name": "Spanish (Latin America)"
+      },
+      {
+        "code": "USpt",
+        "name": "Portuguese (Brazil)",
+        "versions": [
+          "1.4.3"
+        ]
+      },
+      {
+        "code": "EUde",
+        "name": "German"
+      },
+      {
+        "code": "EUit",
+        "name": "Italian"
+      },
+      {
+        "code": "EUnl",
+        "name": "Dutch"
+      },
+      {
+        "code": "EUru",
+        "name": "Russian"
+      },
+      {
+        "code": "JPja",
+        "name": "Japanese"
+      },
+      {
+        "code": "KRko",
+        "name": "Korean"
+      },
+      {
+        "code": "CNzh",
+        "name": "Chinese (Simplified)"
+      },
+      {
+        "code": "TWzh",
+        "name": "Chinese (Traditional)"
+      }
+    ]
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Tears of the Kingdom.",
+      "detail": "Play opens this app. It's named Tears of the Kingdom.app, and MacNativeGames puts it next to your game file unless you chose another folder when building (for example ~/Games/macOS). If a mod changes how much memory the game sets aside, Graft rebuilds this app for you, which takes about a minute."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the XCI or NSP file you dumped from your Switch.",
+      "detail": "Graft reads the game's original files from it, so it can combine your mods with them. Reading it needs the keys from your Switch, which you set in Settings."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's update: the NSP file you dumped from your Switch.",
+      "detail": "Mods are combined with the game files of this exact version, so it has to match the game app's version. You rarely need to choose it yourself: Graft looks inside the update files in your Games folder and picks the one that matches."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named TOTK_build unless you chose another name when building. Graft reads how the game's code is laid out from it, and uses it when it needs to rebuild the app."
+    }
+  ]
+}

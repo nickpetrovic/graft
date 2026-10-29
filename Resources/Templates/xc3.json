@@ -1,0 +1,61 @@
+{
+  "revision": 2,
+  "id": "xc3",
+  "name": "Xenoblade Chronicles 3",
+  "titleId": "010074F013262000",
+  "updateTitleId": "010074F013262800",
+  "macNativeGamesFolder": "xc3",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.xc3"
+  },
+  "dataFolder": "XC3",
+  "workFolder": "XC3_build",
+  "workTree": "",
+  "log": {
+    "file": "xc3",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".wimdo",
+      ".wismt",
+      ".wismhd",
+      ".wilay",
+      ".bdat"
+    ],
+    "folders": []
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Xenoblade Chronicles 3 reads one mod folder with a manifest, but its build has no Python environment of its own that Graft could write the manifest with."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Xenoblade Chronicles 3.",
+      "detail": "Play opens this app. It's named Xenoblade Chronicles 3.app, and MacNativeGames builds it in games/xc3 in your MacNativeGames folder unless you chose another place when building. The app carries everything the game reads, so it keeps working when the work folder is moved or deleted."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the 1.0.0 base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 2.2.1 update: the NSP file you dumped from your Switch.",
+      "detail": "It's optional: with it, MacNativeGames builds the game app for 2.2.1 instead of 1.0.0."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named XC3_build inside games/xc3 in your MacNativeGames folder unless you chose another name when building. Both game versions can share it."
+    }
+  ]
+}

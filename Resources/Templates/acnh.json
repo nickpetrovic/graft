@@ -1,0 +1,46 @@
+{
+  "revision": 2,
+  "id": "acnh",
+  "name": "Animal Crossing: New Horizons",
+  "titleId": "01006F8002326000",
+  "updateTitleId": "01006F8002326800",
+  "macNativeGamesFolder": "acnh",
+  "app": {
+    "bundleIdentifier": "com.nintendo.acnh.native",
+    "fileName": "Animal Crossing New Horizons.app"
+  },
+  "workFolder": "ACNH_build",
+  "log": {
+    "linePrefix": "[totk]"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Animal Crossing: New Horizons app doesn't load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Animal Crossing: New Horizons.",
+      "detail": "Play opens this app. It's named Animal Crossing New Horizons.app, and you choose its folder when you package it. It keeps its saves, settings and log in the Animal Crossing Data folder next to the app."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the base game 1.0.0: the NSP file you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it and the update. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's update: the NSP file you dumped from your Switch.",
+      "detail": "The update decides the version the game app runs: 1.2.1, or 3.0.1, which is still experimental."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's usually named ACNH_build. It holds the game files MacNativeGames prepared for each version and the native build made from them."
+    }
+  ]
+}

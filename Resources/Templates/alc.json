@@ -1,0 +1,46 @@
+{
+  "revision": 2,
+  "id": "alc",
+  "name": "Astral Chain",
+  "titleId": "01007300020FA000",
+  "updateTitleId": "01007300020FA800",
+  "macNativeGamesFolder": "alc",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.alc",
+    "workFolderKey": "ALCWorkFolder"
+  },
+  "dataFolder": "ALC",
+  "workFolder": "AC_build",
+  "workTree": "",
+  "log": {
+    "file": "alc",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Astral Chain loads one mod that you pick in its launcher from a mods folder next to its work folder, and Graft can't manage that folder yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Astral Chain.",
+      "detail": "Play opens this app. It's named Astral Chain.app, and MacNativeGames builds it in games/alc in your MacNativeGames folder, or copies it to /Applications or ~/Applications when you install it. The app is small: it runs the game from the work folder it was built from, so keep that folder where it is."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game: the XCI card image you dumped from your Switch.",
+      "detail": "The card image holds both the base game and the 1.0.1 update, and MacNativeGames reads the game's code and data from it. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named AC_build inside games/alc in your MacNativeGames folder unless you chose another name when building. The game app records where it is and runs the game from it."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "revision": 2,
+  "id": "aoc",
+  "name": "Hyrule Warriors: Age of Calamity",
+  "titleId": "01002B00111A2000",
+  "macNativeGamesFolder": "aoc",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.aoc",
+    "fileName": "Hyrule Warriors Age of Calamity.app"
+  },
+  "log": {
+    "linePrefix": "[dm]"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Hyrule Warriors: Age of Calamity port has no way to load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Hyrule Warriors: Age of Calamity.",
+      "detail": "Play opens this app. You choose its name and folder when you build it; the MacNativeGames guide names it Hyrule Warriors Age of Calamity.app. It keeps its saves, settings and logs in ~/Library/Application Support/Hyrule Warriors Age of Calamity."
+    }
+  ]
+}

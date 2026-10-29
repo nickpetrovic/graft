@@ -1,0 +1,52 @@
+{
+  "revision": 2,
+  "id": "mvdk",
+  "name": "Mario vs. Donkey Kong",
+  "titleId": "0100B99019412000",
+  "updateTitleId": "0100B99019412800",
+  "macNativeGamesFolder": "mvdk",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.mvdk"
+  },
+  "dataFolder": "MvDK",
+  "workFolder": "MvDK_build",
+  "workTree": "mvdk",
+  "log": {
+    "file": "mvdk",
+    "linePrefix": "[totk]",
+    "enableVariable": "TOTK_DEBUG_LOG"
+  },
+  "versionFolders": {
+    "prefix": "mvdk"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Mario vs. Donkey Kong reads a mod folder with a manifest, but MacNativeGames has no script that writes the manifest for this game."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Mario vs. Donkey Kong.",
+      "detail": "Play opens this app. It's named Mario vs. Donkey Kong.app, and MacNativeGames puts it next to your game file unless you chose another one when building. The app carries everything the game runs with."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames merges its data with the update's to build the game app. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.0.1 update: the NSP file you dumped from your Switch.",
+      "detail": "The game app runs 1.0.1, so MacNativeGames needs this update."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named MvDK_build and sits next to your game file unless you chose another folder when building."
+    }
+  ]
+}

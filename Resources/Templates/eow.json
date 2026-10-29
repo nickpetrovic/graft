@@ -1,0 +1,40 @@
+{
+  "revision": 2,
+  "id": "eow",
+  "name": "The Legend of Zelda: Echoes of Wisdom",
+  "titleId": "01008CF01BAAC000",
+  "updateTitleId": "01008CF01BAAC800",
+  "macNativeGamesFolder": "eow",
+  "workFolder": "EoW_build",
+  "workTree": "",
+  "log": {
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Echoes of Wisdom has no game app yet: it runs from its work folder, and its mods are set up by hand."
+  },
+  "files": [
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames merges its data with the update's. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.1.0 update: the NSP file you dumped from your Switch.",
+      "detail": "The game's code comes from this update."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named EoW_build unless you chose another name when building. The game runs from this folder and keeps its saves in the user-data folder inside it."
+    }
+  ]
+}

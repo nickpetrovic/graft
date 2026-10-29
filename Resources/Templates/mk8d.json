@@ -1,0 +1,38 @@
+{
+  "revision": 2,
+  "id": "mk8d",
+  "name": "Mario Kart 8 Deluxe",
+  "titleId": "0100152000022000",
+  "updateTitleId": "0100152000022800",
+  "macNativeGamesFolder": "mk8d",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.mk8d"
+  },
+  "log": {
+    "linePrefix": "[dm]"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Mario Kart 8 Deluxe port has no way to load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Mario Kart 8 Deluxe.",
+      "detail": "Play opens this app. You choose its name and folder when you build it, for example Mario Kart 8 Deluxe.app. It keeps its saves in ~/Library/Application Support/nxnative/0100152000022000 and its log in ~/Library/Logs/nxnative."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it, the 4.0.1 update and, if you have it, the Booster Course Pass, which go in one folder. Reading them needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 4.0.1 update: the NSP file you dumped from your Switch.",
+      "detail": "The game app runs 4.0.1, so MacNativeGames needs this update."
+    }
+  ]
+}

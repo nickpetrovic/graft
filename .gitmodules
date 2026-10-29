@@ -1,0 +1,7 @@
+[submodule "vendor/TkSharp"]
+	path = vendor/TkSharp
+	url = https://github.com/TKMM-Team/TkSharp.git
+	ignore = dirty
+[submodule "vendor/capstone"]
+	path = vendor/capstone
+	url = https://github.com/capstone-engine/capstone.git

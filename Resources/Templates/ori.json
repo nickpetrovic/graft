@@ -1,0 +1,51 @@
+{
+  "revision": 2,
+  "id": "ori",
+  "name": "Ori and the Blind Forest: Definitive Edition",
+  "titleId": "010061D00DB74000",
+  "updateTitleId": "010061D00DB74800",
+  "macNativeGamesFolder": "ori",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.ori",
+    "fileName": "Ori and the Blind Forest.app"
+  },
+  "dataFolder": "Ori",
+  "workTree": "",
+  "log": {
+    "file": "ori",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Ori and the Blind Forest app doesn't load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Ori and the Blind Forest: Definitive Edition.",
+      "detail": "Play opens this app. It's named Ori and the Blind Forest.app, and MacNativeGames puts it next to your game file unless you chose another folder when building. The app carries everything the game runs with."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the XCI card image or the base game NSP you dumped from your Switch.",
+      "detail": "A card image usually holds the 1.0.1 update as well. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.0.1 update: the NSP file you dumped from your Switch.",
+      "detail": "You need it only when your game file holds the base game alone."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "For this game it's games/ori in your MacNativeGames folder: MacNativeGames keeps the extracted game and the build there."
+    }
+  ]
+}

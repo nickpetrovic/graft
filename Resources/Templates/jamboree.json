@@ -1,0 +1,38 @@
+{
+  "revision": 2,
+  "id": "jamboree",
+  "name": "Super Mario Party Jamboree",
+  "titleId": "0100965017338000",
+  "updateTitleId": "0100965017338800",
+  "macNativeGamesFolder": "jamboree",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.jamboree"
+  },
+  "log": {
+    "linePrefix": "[dm]"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Super Mario Party Jamboree port has no way to load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Super Mario Party Jamboree.",
+      "detail": "Play opens this app. You choose its name and folder when you build it, for example Super Mario Party Jamboree.app. It keeps its saves, settings and log in ~/Library/Application Support/Super Mario Party Jamboree."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the NSP or XCI file you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it and the update, which go in one folder. Reading them needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 2.3.0 update: the NSP file you dumped from your Switch.",
+      "detail": "The game app runs 2.3.0, so MacNativeGames needs this update."
+    }
+  ]
+}

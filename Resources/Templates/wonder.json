@@ -1,0 +1,55 @@
+{
+  "revision": 2,
+  "id": "wonder",
+  "name": "Super Mario Bros. Wonder",
+  "titleId": "010015100B514000",
+  "updateTitleId": "010015100B514800",
+  "macNativeGamesFolder": "wonder",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.wonder"
+  },
+  "dataFolder": "Wonder",
+  "workFolder": "Wonder_build",
+  "workTree": "wonder",
+  "log": {
+    "file": "wonder",
+    "linePrefix": "[totk]",
+    "enableVariable": "TOTK_DEBUG_LOG"
+  },
+  "versionFolders": {
+    "prefix": "wonder",
+    "exceptions": {
+      "1.0.0": "wonder"
+    }
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Super Mario Bros. Wonder reads a mod folder with a manifest, but MacNativeGames has no script that writes the manifest for this game."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Super Mario Bros. Wonder.",
+      "detail": "Play opens this app. It's named Super Mario Bros. Wonder.app, and MacNativeGames puts it next to your game file unless you chose another folder when building. The app carries everything the game runs with."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the 1.0.0 base game NSP or XCI you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.2.1 update: the NSP file you dumped from your Switch.",
+      "detail": "It's optional: with it, the game app runs 1.2.1 instead of 1.0.0."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named Wonder_build and sits next to your game file unless you chose another folder when building."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "revision": 2,
+  "id": "unicorn",
+  "name": "Unicorn Overlord",
+  "titleId": "010054B01AD92000",
+  "updateTitleId": "010054B01AD92800",
+  "macNativeGamesFolder": "unicorn",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.unicorn",
+    "fileName": "圣兽之王.app",
+    "workFolderKey": "UnicornWorkFolder"
+  },
+  "workFolder": "Unicorn-build-1.05",
+  "workTree": "",
+  "log": {
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v",
+    "exceptions": {
+      "1.05": "v262144"
+    }
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Unicorn Overlord app doesn't load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Unicorn Overlord.",
+      "detail": "Play opens this app. It's named 圣兽之王.app, the game's Chinese name, and MacNativeGames builds it inside the work folder. The app is small: it runs the game from the work folder, so keep that folder where it is."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames supports only the Asian release of the game. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.05 update: the NSP file you dumped from your Switch.",
+      "detail": "The game's code comes from this update, and MacNativeGames supports no other version."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's ~/Games/Unicorn-build-1.05 unless you chose another folder when building. The game runs from it and writes its log, boot.log, there."
+    }
+  ]
+}

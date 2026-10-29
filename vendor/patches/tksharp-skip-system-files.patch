@@ -1,0 +1,38 @@
+diff --git a/TkSharp.Core/TkSystemFiles.cs b/TkSharp.Core/TkSystemFiles.cs
+new file mode 100644
+index 0000000..105ba66
+--- /dev/null
++++ b/TkSharp.Core/TkSystemFiles.cs
+@@ -0,0 +1,17 @@
++namespace TkSharp.Core;
++
++public static class TkSystemFiles
++{
++    public static bool IsMetadata(string path)
++    {
++        var parts = path.Replace('\\', '/').Split('/', StringSplitOptions.RemoveEmptyEntries);
++        if (parts.Length == 0) {
++            return false;
++        }
++
++        var name = parts[^1];
++        return name.StartsWith("._", StringComparison.Ordinal)
++            || name is ".DS_Store" or "Thumbs.db" or "desktop.ini"
++            || parts.Contains("__MACOSX");
++    }
++}
+diff --git a/TkSharp.Merging/TkChangelogBuilder.cs b/TkSharp.Merging/TkChangelogBuilder.cs
+index 848df5c..3c71711 100644
+--- a/TkSharp.Merging/TkChangelogBuilder.cs
++++ b/TkSharp.Merging/TkChangelogBuilder.cs
+@@ -80,6 +80,10 @@ public class TkChangelogBuilder(
+ 
+     private void BuildTarget(string file, object entry)
+     {
++        if (TkSystemFiles.IsMetadata(file)) {
++            return;
++        }
++
+         var path = TkPath.FromPath(file, _source.PathToRoot, out var isInvalid);
+         if (isInvalid) {
+             return;

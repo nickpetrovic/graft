@@ -1,0 +1,60 @@
+{
+  "revision": 2,
+  "id": "odyssey",
+  "name": "Super Mario Odyssey",
+  "titleId": "0100000000010000",
+  "updateTitleId": "0100000000010800",
+  "macNativeGamesFolder": "odyssey",
+  "app": {
+    "bundleIdentifier": "local.projectidea.odyssey",
+    "fileName": "Odyssey.app"
+  },
+  "workFolder": "Odyssey_build",
+  "workTree": "",
+  "log": {
+    "linePrefix": "[totk]"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".szs"
+    ],
+    "folders": [
+      "ObjectData/",
+      "StageData/",
+      "LayoutData/",
+      "SystemData/",
+      "EffectData/",
+      "LocalizedData/"
+    ]
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "The Super Mario Odyssey app doesn't load mods yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Super Mario Odyssey.",
+      "detail": "Play opens this app. It's named Odyssey.app, and MacNativeGames builds it inside the work folder. It keeps its saves, settings and logs in the Odyssey Data folder next to the app."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the XCI or NSP file you dumped from your Switch.",
+      "detail": "The file holds the base game and the 1.3.0 or 1.4.1 update, or the base game alone if you also have the update as a separate file. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.3.0 or 1.4.1 update: the NSP file you dumped from your Switch.",
+      "detail": "You need it only when your game file is the base game alone: MacNativeGames joins the two before building."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named Odyssey_build inside games/odyssey in your MacNativeGames folder unless you chose another folder when building. The game app is built inside it."
+    }
+  ]
+}

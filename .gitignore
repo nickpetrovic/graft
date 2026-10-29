@@ -1,0 +1,10 @@
+.DS_Store
+.build/
+.swiftpm/
+Sources/GraftMerge/bin/
+Sources/GraftMerge/obj/
+Tests/GraftMergeTests/bin/
+Tests/GraftMergeTests/obj/
+xcuserdata/
+.vscode/
+.idea/

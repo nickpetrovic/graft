@@ -1,0 +1,67 @@
+{
+  "revision": 2,
+  "id": "ssbu",
+  "name": "Super Smash Bros. Ultimate",
+  "titleId": "01006A800016E000",
+  "updateTitleId": "01006A800016E800",
+  "macNativeGamesFolder": "ssbu",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.ssbu"
+  },
+  "dataFolder": "SSBU",
+  "workFolder": "SSBU_build",
+  "workTree": "",
+  "log": {
+    "file": "ssbu",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".nutexb",
+      ".numatb",
+      ".numdlb",
+      ".numshb",
+      ".nuanmb",
+      ".nusktb",
+      ".nus3audio",
+      ".nus3bank"
+    ],
+    "folders": [
+      "fighter/",
+      "stream;/"
+    ]
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Super Smash Bros. Ultimate reads a mod folder with a manifest, but MacNativeGames has no script that writes the manifest for this game."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Super Smash Bros. Ultimate.",
+      "detail": "Play opens this app. It's named Super Smash Bros. Ultimate.app, and MacNativeGames puts it next to your game file unless you chose another folder when building. The app carries everything the game runs with."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the 1.0.0 card image (XCI) or base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames merges its data with the update's to build the game app. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 13.0.2 or 13.0.5 update: the NSP file you dumped from your Switch.",
+      "detail": "The game app runs the version of this update, so MacNativeGames needs it."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's SSBU_build inside games/ssbu in your MacNativeGames folder unless you chose another folder when building."
+    }
+  ]
+}

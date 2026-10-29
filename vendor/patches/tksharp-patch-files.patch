@@ -1,0 +1,275 @@
+diff --git a/TkSharp.Core/TkPatch.cs b/TkSharp.Core/TkPatch.cs
+index ae0c331..aae7c47 100644
+--- a/TkSharp.Core/TkPatch.cs
++++ b/TkSharp.Core/TkPatch.cs
+@@ -1,5 +1,4 @@
+ using System.Buffers.Binary;
+-using System.Diagnostics.CodeAnalysis;
+ using System.Globalization;
+ using Revrs;
+ using Revrs.Extensions;
+@@ -68,117 +67,195 @@ public class TkPatch(string nsoBinaryId)
+         output.Write(EOF_MARK, Endianness.Big);
+     }
+ 
++    public List<string> Warnings { get; } = [];
++
++    private void AddBytes(uint address, ReadOnlySpan<byte> bytes, string where)
++    {
++        var whole = bytes.Length / 4 * 4;
++        for (var offset = 0; offset < whole; offset += 4) {
++            Entries[address + (uint)offset] = BinaryPrimitives.ReadUInt32BigEndian(bytes[offset..]);
++        }
++
++        if (whole < bytes.Length) {
++            Warnings.Add($"{where}: left out {bytes.Length - whole} byte(s) at 0x{address + whole:x8}, because TKMM's patch format stores whole 4-byte values only");
++        }
++    }
++
+     public static TkPatch? FromIps(Stream stream, string nsoBinaryId)
+     {
+-        if (stream.Read<uint>() is not IPS32_MAGIC_PREFIX || stream.ReadByte() is not IPS32_MAGIC_SUFFIX) {
++        Span<byte> magic = stackalloc byte[5];
++        if (stream.Read(magic) != 5) {
+             return null;
+         }
+ 
+-        TkPatch patch = new(nsoBinaryId);
++        bool wide;
++        if (magic.SequenceEqual("IPS32"u8)) {
++            wide = true;
++        }
++        else if (magic.SequenceEqual("PATCH"u8)) {
++            wide = false;
++        }
++        else {
++            return null;
++        }
++
++        TkPatch patch = new(ReadHexId(nsoBinaryId));
++        var addressSize = wide ? 4 : 3;
++        Span<byte> buffer = stackalloc byte[4];
++        while (true) {
++            var addressBytes = buffer[..addressSize];
++            if (stream.ReadAtLeast(addressBytes, addressSize, throwOnEndOfStream: false) < addressSize) {
++                patch.Warnings.Add($"{nsoBinaryId}.ips: the file ends without an EOF record");
++                break;
++            }
+ 
+-        var address = stream.Read<uint>(Endianness.Big);
+-        while (address is not EOF_MARK && stream.Position < stream.Length) {
+-            int valueSize = stream.Read<short>(Endianness.Big);
+-            if (valueSize is not 4) {
+-                goto NextAddress;
++            if (wide ? addressBytes.SequenceEqual("EEOF"u8) : addressBytes.SequenceEqual("EOF"u8)) {
++                break;
+             }
+ 
+-            var value = stream.Read<uint>(Endianness.Big);
+-            patch.Entries[address - NSO_HEADER_LENGTH] = value;
++            uint address = 0;
++            foreach (var b in addressBytes) {
++                address = address << 8 | b;
++            }
++
++            var size = ReadBigEndian16(stream);
++            if (size < 0) {
++                patch.Warnings.Add($"{nsoBinaryId}.ips: the file is cut off in a record");
++                break;
++            }
+ 
+-        NextAddress:
+-            address = stream.Read<uint>(Endianness.Big);
++            byte[] value;
++            if (size == 0) {
++                var count = ReadBigEndian16(stream);
++                var fill = stream.ReadByte();
++                if (count < 0 || fill < 0) {
++                    patch.Warnings.Add($"{nsoBinaryId}.ips: the file is cut off in a record");
++                    break;
++                }
++
++                value = Enumerable.Repeat((byte)fill, count).ToArray();
++            }
++            else {
++                value = new byte[size];
++                if (stream.ReadAtLeast(value, size, throwOnEndOfStream: false) < size) {
++                    patch.Warnings.Add($"{nsoBinaryId}.ips: the file is cut off in a record");
++                    break;
++                }
++            }
++
++            if (address < NSO_HEADER_LENGTH) {
++                patch.Warnings.Add($"{nsoBinaryId}.ips: left out a record at 0x{address:x}, inside the NSO header");
++                continue;
++            }
++
++            patch.AddBytes(address - NSO_HEADER_LENGTH, value, $"{nsoBinaryId}.ips");
+         }
+ 
+         return patch;
+     }
+ 
+-    private const string NSOBID_KEYWORD = "@nsobid";
++    private static int ReadBigEndian16(Stream stream)
++    {
++        var high = stream.ReadByte();
++        var low = stream.ReadByte();
++        return high < 0 || low < 0 ? -1 : high << 8 | low;
++    }
++
++    private const string NSOBID_KEYWORD = "@nsobid-";
+     private const string ENABLED_KEYWORD = "@enabled";
+-    private const char COMMENT_CHAR = '@';
++    private const string DISABLED_KEYWORD = "@disabled";
+     private const string STOP_KEYWORD = "@stop";
++    private const string OFFSET_SHIFT_KEYWORD = "@flag offset_shift";
+ 
+     public static TkPatch? FromPchTxt(Stream stream)
+     {
+         using StreamReader reader = new(stream);
+ 
+-        if (reader.ReadLine() is not { } firstLine) {
+-            return null;
+-        }
++        TkPatch? patch = null;
++        var enabled = false;
++        long shift = 0;
++        var lineNumber = 0;
++        while (reader.ReadLine() is { } raw) {
++            lineNumber++;
++            var line = raw.Trim();
++            if (line.StartsWith(NSOBID_KEYWORD, StringComparison.OrdinalIgnoreCase)) {
++                patch ??= new TkPatch(ReadHexId(line[NSOBID_KEYWORD.Length..]));
++                continue;
++            }
+ 
+-        if (!TryGetNsoBinaryId(firstLine, out var nsoBinaryId)) {
+-            return null;
+-        }
++            if (patch is null) {
++                continue;
++            }
+ 
+-        TkPatch patch = new(nsoBinaryId);
++            if (line.StartsWith(STOP_KEYWORD, StringComparison.OrdinalIgnoreCase)) {
++                break;
++            }
+ 
+-        var state = State.None;
+-        while (reader.ReadLine() is { } line) {
+-            if (state is State.Enabled) {
+-                if (line.StartsWith(STOP_KEYWORD)) {
+-                    state = State.None;
+-                    continue;
+-                }
++            if (line.StartsWith(ENABLED_KEYWORD, StringComparison.OrdinalIgnoreCase)) {
++                enabled = true;
++                continue;
++            }
+ 
+-                if (line.Length > 0 && line[0] == COMMENT_CHAR) {
+-                    continue;
+-                }
++            if (line.StartsWith(DISABLED_KEYWORD, StringComparison.OrdinalIgnoreCase)) {
++                enabled = false;
++                continue;
++            }
+ 
+-                if (GetAddressAndValue(line) is not { } values) {
+-                    continue;
++            if (line.StartsWith(OFFSET_SHIFT_KEYWORD, StringComparison.OrdinalIgnoreCase)) {
++                var text = line[OFFSET_SHIFT_KEYWORD.Length..].Trim();
++                var isHex = text.StartsWith("0x", StringComparison.OrdinalIgnoreCase);
++                if (long.TryParse(isHex ? text[2..] : text, isHex ? NumberStyles.HexNumber : NumberStyles.Integer,
++                        NumberFormatInfo.InvariantInfo, out var value)) {
++                    shift = value;
+                 }
+ 
+-                patch.Entries[values.Address] = values.Value;
+                 continue;
+             }
+ 
+-            if (line.StartsWith(ENABLED_KEYWORD)) {
+-                state = State.Enabled;
++            if (!enabled || line.Length == 0 || line[0] == '@' || line.StartsWith("//")) {
++                continue;
+             }
+-        }
+ 
+-        return patch;
+-    }
++            var fields = line.Split([' ', '\t'], 3, StringSplitOptions.RemoveEmptyEntries);
++            if (fields.Length < 2 || !uint.TryParse(fields[0], NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out var address)) {
++                continue;
++            }
+ 
+-    private static bool TryGetNsoBinaryId(ReadOnlySpan<char> line, [MaybeNullWhen(false)] out string nosBinaryId)
+-    {
+-        if (line is not { Length: > 7 } || line[..7] is not NSOBID_KEYWORD) {
+-            nosBinaryId = null;
+-            return false;
+-        }
++            var where = $"pchtxt line {lineNumber}";
++            if (fields[1].StartsWith('"')) {
++                patch.Warnings.Add($"{where}: left out a text value, which TKMM's patch format can't store");
++                continue;
++            }
+ 
+-        nosBinaryId = line[8..].ToString();
+-        return true;
+-    }
++            byte[] bytes;
++            try {
++                bytes = Convert.FromHexString(fields[1]);
++            }
++            catch (FormatException) {
++                patch.Warnings.Add($"{where}: left out '{fields[1]}', which is not a whole number of hex bytes");
++                continue;
++            }
+ 
+-    private static (uint Address, uint Value)? GetAddressAndValue(ReadOnlySpan<char> line)
+-    {
+-        var addressEndIndex = GetValueEndIndex(line, 0);
+-        if (!uint.TryParse(line[..addressEndIndex], NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out var address)) {
+-            return null;
+-        }
++            var target = (long)address + shift - NSO_HEADER_LENGTH;
++            if (target < 0 || target > uint.MaxValue) {
++                patch.Warnings.Add($"{where}: left out an address outside the game code");
++                continue;
++            }
+ 
+-        var valueEndIndex = GetValueEndIndex(line, ++addressEndIndex);
+-        if (!uint.TryParse(line[addressEndIndex..valueEndIndex], NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo, out var value)) {
+-            return null;
++            patch.AddBytes((uint)target, bytes, where);
+         }
+ 
+-        return (address, value);
++        return patch;
+     }
+ 
+-    private static int GetValueEndIndex(ReadOnlySpan<char> chars, int startIndex)
++    private static string ReadHexId(string text)
+     {
+-        var endIndex = startIndex;
+-        while (endIndex < chars.Length && chars[endIndex] is >= 'A' and <= 'F' or >= 'a' and <= 'f' or >= '0' and <= '9') {
+-            endIndex++;
++        var length = 0;
++        while (length < text.Length && char.IsAsciiHexDigit(text[length])) {
++            length++;
+         }
+ 
+-        return endIndex;
++        var id = text[..length].ToLowerInvariant();
++        return id.Length > 40 && id[40..].All(c => c == '0') ? id[..40] : id;
+     }
+ }
+-
+-file enum State
+-{
+-    None,
+-    Enabled,
+-}
+\ No newline at end of file

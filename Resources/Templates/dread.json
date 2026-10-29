@@ -1,0 +1,57 @@
+{
+  "revision": 2,
+  "id": "dread",
+  "name": "Metroid Dread",
+  "titleId": "010093801237C000",
+  "macNativeGamesFolder": "dread",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.dread",
+    "workFolderKey": "DreadWorkFolder"
+  },
+  "dataFolder": "Dread",
+  "workFolder": "Dread_build",
+  "workTree": "",
+  "log": {
+    "file": "dread",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".bmsad",
+      ".brfld",
+      ".brsa",
+      ".bcmdl",
+      ".bctex"
+    ],
+    "folders": [
+      "packs/"
+    ]
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Metroid Dread loads one mod that you pick in its launcher from a mods folder next to its work folder, and Graft can't manage that folder yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Metroid Dread.",
+      "detail": "Play opens this app. It's named Metroid Dread.app, and MacNativeGames puts it next to your game file unless you chose another one when building. The app is small: it runs the game from the work folder, so keep that folder where it is."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the XCI or NSP file of the base game 1.0.0 you dumped from your Switch.",
+      "detail": "MacNativeGames builds the game app from it. Updates aren't supported for this game yet. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named Dread_build and sits next to your game file unless you chose another folder when building. The game app records where it is and runs the game from it."
+    }
+  ]
+}

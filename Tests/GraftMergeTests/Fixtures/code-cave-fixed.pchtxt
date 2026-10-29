@@ -1,0 +1,16 @@
+@nsobid-9B4E43650501A4D4489B4BBFDB740F26AF3CF850
+
+@flag print_values
+@flag offset_shift 0x100
+
+// The same mod with its values moved to the free writable memory at 0x472b000.
+@enabled
+01000000 00C0C317 // b 0xf0000
+000f0000 C93102F0 // adrp x9, 0x472b000
+000f0004 2A8147F9 // ldr x10, [x9, 0xf00]
+000f0008 4A050091 // add x10, x10, 1
+000f000c 2A8107F9 // str x10, [x9, 0xf00]
+000f0010 CB3102F0 // adrp x11, 0x472b000
+000f0014 60090FB9 // str w0, [x11, 0xf08]
+000f0018 FB3F3C14 // b 0x1000004
+@stop

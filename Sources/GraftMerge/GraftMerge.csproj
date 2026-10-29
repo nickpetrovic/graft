@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>graft-merge</AssemblyName>
+    <RootNamespace>GraftMerge</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../vendor/TkSharp/TkSharp/TkSharp.csproj" />
+    <ProjectReference Include="../../vendor/TkSharp/TkSharp.Merging/TkSharp.Merging.csproj" />
+    <ProjectReference Include="../../vendor/TkSharp/TkSharp.Data.Embedded/TkSharp.Data.Embedded.csproj" />
+    <ProjectReference Include="../../vendor/TkSharp/Extensions/TkSharp.Extensions.LibHac/TkSharp.Extensions.LibHac.csproj" />
+  </ItemGroup>
+
+</Project>

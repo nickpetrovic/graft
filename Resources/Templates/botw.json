@@ -1,0 +1,80 @@
+{
+  "revision": 2,
+  "id": "botw",
+  "name": "Breath of the Wild",
+  "titleId": "01007EF00011E000",
+  "updateTitleId": "01007EF00011E800",
+  "macNativeGamesFolder": "botw",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.botw"
+  },
+  "dataFolder": "BotW",
+  "workFolder": "BotW_build",
+  "workTree": "totk",
+  "log": {
+    "file": "botw",
+    "linePrefix": "[totk]",
+    "enableVariable": "TOTK_DEBUG_LOG"
+  },
+  "versionFolders": {
+    "prefix": "botw"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".sbactorpack",
+      ".bactorpack",
+      ".sbfres",
+      ".sbitemico",
+      ".sbeventpack",
+      ".sblarc",
+      ".ssarc",
+      ".sbquestpack",
+      ".sbmapopen",
+      ".sbreviewtex",
+      ".sbstftex",
+      ".smubin",
+      ".sbyml",
+      ".srsizetable",
+      ".shknm2",
+      ".shksc",
+      ".sstera",
+      ".sbmaptex"
+    ],
+    "folders": [
+      "Actor/Pack/",
+      "Map/MainField/",
+      "Pack/Bootup",
+      "Pack/TitleBG"
+    ]
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Breath of the Wild reads one mod folder with a manifest, but a mod that makes a game file larger also needs a matching resource size table, which Graft can't build yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Breath of the Wild.",
+      "detail": "Play opens this app. It's named Breath of the Wild.app, and MacNativeGames puts it next to your game file unless you chose another folder when building (for example ~/Games/macOS)."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the XCI or NSP file you dumped from your Switch.",
+      "detail": "A 1.6.0 card image (XCI) holds the base game, its update and the add-on content in one file. For 1.9.0, MacNativeGames builds from the base game NSP and the 1.9.0 update. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's update: the 1.6.0 or 1.9.0 update you dumped from your Switch.",
+      "detail": "The game app runs the version of this update. A 1.6.0 card image already holds its update, so you need this file only when your game file is the base game alone."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named BotW_build and sits next to your game file unless you chose another folder when building. It holds the extracted game and the Python environment MacNativeGames builds with."
+    }
+  ]
+}

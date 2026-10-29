@@ -1,0 +1,52 @@
+{
+  "revision": 2,
+  "id": "by3",
+  "name": "Bayonetta 3",
+  "titleId": "01004A4010FEA000",
+  "updateTitleId": "01004A4010FEA800",
+  "macNativeGamesFolder": "by3",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.by3",
+    "workFolderKey": "BY3WorkFolder"
+  },
+  "dataFolder": "BY3",
+  "workFolder": "BY3_build",
+  "workTree": "",
+  "log": {
+    "file": "by3",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "mods": {
+    "engine": "unsupported",
+    "reason": "Bayonetta 3 loads one mod that you pick in its launcher from a mods folder next to its work folder, and Graft can't manage that folder yet."
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Bayonetta 3.",
+      "detail": "Play opens this app. It's named Bayonetta 3.app, and MacNativeGames builds it in games/by3 in your MacNativeGames folder, or copies it to /Applications or ~/Applications when you install it. The app is small: it runs the game from the work folder it was built from, so keep that folder where it is."
+    },
+    {
+      "role": "baseGame",
+      "label": "Base game",
+      "summary": "Your copy of the game itself: the base game NSP you dumped from your Switch.",
+      "detail": "MacNativeGames merges its data with the update's to build the game app. Reading it needs the keys from your Switch."
+    },
+    {
+      "role": "update",
+      "label": "Update",
+      "summary": "Your copy of the game's 1.2.0 update: the NSP file you dumped from your Switch.",
+      "detail": "The game's code comes from this update, and most of its data too."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's named BY3_build inside games/by3 in your MacNativeGames folder unless you chose another name when building. The game app records where it is and runs the game from it."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/vendor/">
+    <Project Path="../../vendor/TkSharp/Extensions/TkSharp.Extensions.LibHac/TkSharp.Extensions.LibHac.csproj" />
+    <Project Path="../../vendor/TkSharp/TkSharp.Core/TkSharp.Core.csproj" />
+    <Project Path="../../vendor/TkSharp/TkSharp.Data.Embedded/TkSharp.Data.Embedded.csproj" />
+    <Project Path="../../vendor/TkSharp/TkSharp.Merging/TkSharp.Merging.csproj" />
+    <Project Path="../../vendor/TkSharp/TkSharp/TkSharp.csproj" />
+  </Folder>
+  <Project Path="GraftMerge.csproj" />
+  <Project Path="../../Tests/GraftMergeTests/GraftMergeTests.csproj" />
+</Solution>

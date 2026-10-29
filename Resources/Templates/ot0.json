@@ -1,0 +1,50 @@
+{
+  "revision": 2,
+  "id": "ot0",
+  "name": "Octopath Traveler 0",
+  "titleId": "01005270232F2000",
+  "updateTitleId": "01005270232F2800",
+  "macNativeGamesFolder": "ot0",
+  "app": {
+    "bundleIdentifier": "org.macnativegames.ot0"
+  },
+  "dataFolder": "OT0",
+  "workFolder": "OT0_build",
+  "workTree": "",
+  "log": {
+    "file": "ot0",
+    "linePrefix": "[totk]"
+  },
+  "versionFolders": {
+    "prefix": "v"
+  },
+  "modSignatures": {
+    "extensions": [
+      ".pak"
+    ],
+    "folders": [
+      "Octopath_Traveler0/"
+    ]
+  },
+  "mods": {
+    "engine": "files",
+    "pakFolder": "Octopath_Traveler0/Content/Paks/~mods",
+    "manifestScript": "games/ot0/scripts/make_mod_manifest.py",
+    "python": "venv/bin/python",
+    "appGameFolder": "Contents/Resources/game"
+  },
+  "files": [
+    {
+      "role": "gameApp",
+      "label": "Game app",
+      "summary": "The Mac app MacNativeGames built for Octopath Traveler 0.",
+      "detail": "Play opens this app. It's named Octopath Traveler 0.app, and MacNativeGames puts it next to your game file unless you chose another folder when building (for example ~/Games/macOS). The app carries the game's files; Graft puts your mods in the game's mod folder in ~/Library/Application Support/MacNativeGames/OT0."
+    },
+    {
+      "role": "workFolder",
+      "label": "Work folder",
+      "summary": "The folder MacNativeGames worked in when it built the game app.",
+      "detail": "It's usually OT0_build inside games/ot0 in your MacNativeGames folder. Graft uses the Python that the build set up there to prepare your mods for the game."
+    }
+  ]
+}
