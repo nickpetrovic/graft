@@ -24,7 +24,7 @@ struct GameDraftTests {
     }
 
     @Test func aNewGameIsFilledInFromItsAppAndItsPort() throws {
-        var draft = GameDraft.make(app: try app("org.macnativegames.myport", name: "My Port"), portFolder: nil, macNativeGames: macNativeGames, templates: noTemplates)
+        let draft = GameDraft.make(app: try app("org.macnativegames.myport", name: "My Port"), portFolder: nil, macNativeGames: macNativeGames, templates: noTemplates)
         let game = draft.definition
 
         #expect(draft.origin == .detected)
@@ -38,10 +38,7 @@ struct GameDraftTests {
         #expect(game.workFolder == "MyPort_build")
         #expect(game.fileMods?.manifestScript == "games/myport/scripts/make_mod_manifest.py")
         #expect(game.files.map(\.role) == [.gameApp, .workFolder])
-        #expect(draft.problems(in: empty, macNativeGames: macNativeGames)
-            == ["Choose where loose .pak files go, so mods that are only .pak files can be added."])
-
-        draft.definition.mods = .files(FileModSettings(pakFolder: "MyPort/Content/Paks/~mods", manifestScript: "games/myport/scripts/make_mod_manifest.py"))
+        #expect(game.fileMods?.pakFolder == nil)
         #expect(draft.problems(in: empty, macNativeGames: macNativeGames).isEmpty)
     }
 

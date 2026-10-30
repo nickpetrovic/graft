@@ -1,5 +1,5 @@
 {
-  "revision": 2,
+  "revision": 3,
   "id": "xc3",
   "name": "Xenoblade Chronicles 3",
   "titleId": "010074F013262000",
@@ -30,7 +30,7 @@
   },
   "mods": {
     "engine": "unsupported",
-    "reason": "Xenoblade Chronicles 3 reads one mod folder with a manifest, but its build has no Python environment of its own that Graft could write the manifest with."
+    "reason": "Xenoblade Chronicles 3 reads one mod folder like Octopath Traveler 0, but Graft hasn't been tested with it yet. To try it, set Mod support to Replace game files in Edit Game, leave the .pak folder empty, and enter the Python you built the game with."
   },
   "files": [
     {

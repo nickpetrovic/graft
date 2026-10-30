@@ -19,6 +19,15 @@ struct MacNativeGamesTests {
         #expect(MacNativeGames(files).python.path == "/work/ot0/venv/bin/python")
     }
 
+    @Test func aPythonGivenAsAFullPathIsUsedAsItIs() {
+        var game = ot0
+        game.mods = .files(FileModSettings(manifestScript: "m.py", python: "/opt/xc3/bin/python"))
+        #expect(MacNativeGames(GraftSettings(definition: game, general: GeneralSettings(), game: GameSettings(workFolder: "/work"))).python.path == "/opt/xc3/bin/python")
+        game.mods = .files(FileModSettings(manifestScript: "m.py", python: "~/venvs/xc3/bin/python"))
+        #expect(MacNativeGames(GraftSettings(definition: game, general: GeneralSettings(), game: GameSettings(workFolder: "/work"))).python.path
+            == FileManager.default.homeDirectoryForCurrentUser.appending(path: "venvs/xc3/bin/python").path)
+    }
+
     @Test func runningAScriptNeedsTheFolder() async throws {
         let settings = GraftSettings(definition: totk, general: GeneralSettings(), game: GameSettings())
         let error = try await #require(throws: GraftError.self) { try await MacNativeGames(settings).run("build_app.py", arguments: []) }

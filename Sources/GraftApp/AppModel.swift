@@ -119,7 +119,7 @@ final class AppModel {
 
     var enabledCount: Int { mods.filter(\.enabled).count }
 
-    var modFormats: String { game.mods.kind.modFormats ?? "files or folders" }
+    var modFormats: String { game.mods.modFormats ?? "files or folders" }
 
     private var store: SettingsStore { SettingsStore(paths: paths, game: game) }
 

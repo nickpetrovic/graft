@@ -65,8 +65,12 @@ public struct SetupCheck: Sendable, Equatable {
                 return "This folder isn't a work folder MacNativeGames built the game in."
             }
             guard game.mods.engineSettings != nil else { return nil }
-            return fm.isExecutableFile(atPath: MacNativeGames(settings).python.path)
-                ? nil : "The work folder has no Python environment yet. Build the game app with MacNativeGames once to create it."
+            let python = MacNativeGames(settings).python
+            guard !fm.isExecutableFile(atPath: python.path) else { return nil }
+            if let fileMods = game.fileMods, fileMods.pythonIsFullPath {
+                return "Graft can't run the Python at \(fileMods.python). Check the Python in Edit Game."
+            }
+            return "The work folder has no Python environment yet. Build the game app with MacNativeGames once to create it."
         }
     }
 }

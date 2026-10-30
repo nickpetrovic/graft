@@ -70,7 +70,7 @@ The settings on the **Mods** tab depend on the mod support you choose:
 | Mod support | Settings |
 | :-- | :-- |
 | Merge with TkSharp | The MacNativeGames scripts that rebuild the app, write the mod folder's manifest and list the places the app patches itself. Code mods: the setting that passes a code-mod file to the game when it starts, the memory size table, where the app records it, and the file that lets the app load code mods without a rebuild. Whether the title-screen text setting applies. The text languages, each with its code, its name and, if it exists only in some versions, those versions |
-| Replace game files | Where loose `.pak` files go inside the game's files, the port's manifest script, the Python environment the port's build makes, and the folder inside the game app that holds the game's files |
+| Replace game files | Where loose `.pak` files go inside the game's files (leave it empty for games whose mods are only RomFS files), the port's manifest script, the Python that runs it (relative to the work folder, or a full path for a Python you made yourself), and the folder inside the game app that holds the game's files |
 | Not supported yet | The reason shown in the sidebar and in Game Info |
 
 The editor checks every field as you type and lists anything wrong at the bottom. Click the list to see all of it.
@@ -145,7 +145,7 @@ Everything the editor shows is in the file. A definition has these fields:
 | `modSignatures.extensions`, `modSignatures.folders` | File extensions and folders that mark a mod as made for this game |
 | `mods.engine` | `tksharp`, `files` or `unsupported`. The other fields of `mods` belong to that kind |
 | `mods` for `tksharp` | `buildScript`, `manifestScript` and `patchSitesScript` (relative to the MacNativeGames folder), `codeMods` (`launchVariable`, `heapTable`, `heapRecord`, `buildIdFile`), `titleText`, and `languages` (each with `code`, `name` and optionally `versions`) |
-| `mods` for `files` | `pakFolder`, `manifestScript` (relative to the MacNativeGames folder), `python` (relative to the work folder) and `appGameFolder` |
+| `mods` for `files` | `pakFolder` (left out when the game's mods are only RomFS files; Graft then accepts only mods with a `romfs` folder), `manifestScript` (relative to the MacNativeGames folder), `python` (relative to the work folder, or a full path starting with `/` or `~`) and `appGameFolder` |
 | `mods` for `unsupported` | `reason` |
 | `template` | The template and revision the game was added from. Exports leave it out |
 

@@ -62,6 +62,14 @@ struct SetupCheckTests {
         #expect(SetupCheck(settings).problem(for: .workFolder) == "Choose the work folder.")
     }
 
+    @Test func aPythonGivenAsAFullPathThatIsMissingIsNamed() throws {
+        try folder.write("work/extracted/v105/romfs/a.bin")
+        var game = ot0
+        game.mods = .files(FileModSettings(manifestScript: "m.py", python: "/missing/bin/python"))
+        let settings = GraftSettings(definition: game, general: GeneralSettings(), game: GameSettings(workFolder: folder.path("work")))
+        #expect(SetupCheck(settings).problem(for: .workFolder) == "Graft can't run the Python at /missing/bin/python. Check the Python in Edit Game.")
+    }
+
     @Test func unsupportedGamesHaveNoFileProblems() {
         #expect(SetupCheck(GraftSettings(definition: botw, general: GeneralSettings(), game: GameSettings())).files.isEmpty)
     }

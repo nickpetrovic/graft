@@ -59,6 +59,18 @@ struct FileModEngineTests {
         #expect(added.mods.first?.dataFiles == 1)
     }
 
+    @Test func aGameWithoutAPakFolderTakesOnlyRomfsMods() async throws {
+        let romfsOnly = FileModEngine(settings: engine.settings, paths: folder.paths, fileMods: FileModSettings(manifestScript: "games/filegame/scripts/manifest.sh"))
+        let pak = try folder.write("downloads/Loose_P.pak", "pak")
+        let withRomfs = try modFolder("Retexture", ["romfs/chr/pc/body.wimdo": "model"])
+
+        let error = await #expect(throws: GraftError.self) { try await romfsOnly.add(pak) { _ in } }
+        let added = try await romfsOnly.add(withRomfs) { _ in }
+
+        #expect(error?.message == "Loose_P.pak has no romfs folder, so there's nothing in it for File Game.")
+        #expect(added.mods.map(\.name) == ["Retexture"])
+    }
+
     @Test func aSinglePakFileIsAdded() async throws {
         let pak = try folder.write("downloads/PS5Buttons_P.pak", "font")
 

@@ -4,9 +4,10 @@ import Testing
 
 struct ModEnginesTests {
     @Test func eachSupportedGameNamesTheModsItTakes() {
-        #expect(totk.mods.kind.modFormats?.contains("tkcl") == true)
-        #expect(ot0.mods.kind.modFormats?.contains(".pak") == true)
-        #expect(botw.mods.kind.modFormats == nil)
+        #expect(totk.mods.modFormats?.contains("tkcl") == true)
+        #expect(ot0.mods.modFormats?.contains(".pak") == true)
+        #expect(ModSupport.files(FileModSettings(manifestScript: "m.py")).modFormats == "zip, 7z or rar files, or folders with romfs inside")
+        #expect(botw.mods.modFormats == nil)
     }
 
     @Test func aGameWithoutAnEngineExplainsWhy() throws {

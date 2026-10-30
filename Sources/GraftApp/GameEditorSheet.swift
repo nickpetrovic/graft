@@ -394,12 +394,12 @@ private struct FileModsSection: View {
 
     var body: some View {
         Section("Mod folder") {
-            CodeField("Folder for .pak files", text: $settings.pakFolder, prompt: "Game/Content/Paks/~mods")
-                .help("Where mods that are only .pak files go inside the game's files.")
+            CodeField("Folder for .pak files", text: $settings.pakFolder.orEmpty, prompt: "None")
+                .help("Where mods that are only .pak files go inside the game's files, for example Game/Content/Paks/~mods. Leave it empty for games whose mods are only RomFS files; Graft then accepts mods with a romfs folder.")
             CodeField("Manifest script", text: $settings.manifestScript, prompt: "games/name/scripts/make_mod_manifest.py")
                 .help("The port's script that writes the mod folder's manifest, relative to the MacNativeGames folder.")
             CodeField("Python", text: $settings.python, prompt: FileModSettings.defaultPython)
-                .help("The Python environment the port's build makes, relative to the work folder.")
+                .help("The Python that runs the port's scripts: a path relative to the work folder, such as venv/bin/python, or a full path, such as ~/venvs/xc3/bin/python, for a port whose build uses a Python you made yourself.")
             CodeField("Game files in the app", text: $settings.appGameFolder, prompt: FileModSettings.defaultAppGameFolder)
                 .help("The folder inside the game app that holds the game's files.")
         }

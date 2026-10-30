@@ -36,7 +36,7 @@ struct ModSupportTests {
 
     @Test func emptySettingsSayWhatIsMissing() {
         #expect(TkSharpSettings().problems().count == 2)
-        #expect(FileModSettings().problems().count == 2)
+        #expect(FileModSettings().problems() == ["Enter the port's manifest script."])
         let languages = TkSharpSettings(buildScript: "b", manifestScript: "m", codeMods: TkSharpSettings.CodeMods(),
                                         languages: [TkSharpSettings.Language(code: "USen", name: "English"), TkSharpSettings.Language(code: "USen", name: "")])
         #expect(languages.problems() == [
@@ -44,5 +44,14 @@ struct ModSupportTests {
             "Every text language needs a code and a name.",
             "Two text languages have the same code.",
         ])
+    }
+}
+
+struct FileModSettingsTests {
+    @Test func thePakFolderIsOptionalAndAnEmptyOneMeansNone() throws {
+        #expect(FileModSettings(manifestScript: "m.py").problems().isEmpty)
+        let json = #"{"engine": "files", "pakFolder": "", "manifestScript": "m.py"}"#
+        let decoded = try JSONDecoder().decode(ModSupport.self, from: Data(json.utf8))
+        #expect(decoded == .files(FileModSettings(manifestScript: "m.py")))
     }
 }

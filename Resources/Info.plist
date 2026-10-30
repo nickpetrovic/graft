@@ -2,18 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleExecutable</key><string>Graft</string>
-  <key>CFBundleIconFile</key><string>AppIcon</string>
-  <key>CFBundleIdentifier</key><string>xyz.petrovic.graft</string>
-  <key>CFBundleName</key><string>Graft</string>
-  <key>CFBundleDisplayName</key><string>Graft</string>
-  <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>0.1.0</string>
-  <key>CFBundleVersion</key><string>1</string>
-  <key>LSMinimumSystemVersion</key><string>26.0</string>
-  <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
-  <key>NSHighResolutionCapable</key><true/>
-  <key>NSDocumentsFolderUsageDescription</key><string>Graft looks in Documents for your game files only when you click Find Files Again in Game Info.</string>
-  <key>NSDownloadsFolderUsageDescription</key><string>Graft looks in Downloads for your game files only when you click Find Files Again in Game Info.</string>
+	<key>CFBundleDisplayName</key>
+	<string>Graft</string>
+	<key>CFBundleExecutable</key>
+	<string>Graft</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>xyz.petrovic.graft</string>
+	<key>CFBundleName</key>
+	<string>Graft</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.2.0</string>
+	<key>CFBundleVersion</key>
+	<string>2</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>26.0</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Graft looks in Documents for your game files only when you click Find Files Again in Game Info.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>Graft looks in Downloads for your game files only when you click Find Files Again in Game Info.</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
 </dict>
 </plist>

@@ -24,7 +24,7 @@ public struct MacNativeGames: Sendable {
 
     public var python: URL {
         let workFolder = URL(fileURLWithPath: settings.game.workFolder)
-        if let fileMods = settings.definition.fileMods { return workFolder.appending(path: fileMods.python) }
+        if let fileMods = settings.definition.fileMods { return fileMods.python(in: workFolder) }
         return workFolder.appending(path: "\(settings.definition.workTreeName)/.venv/bin/python")
     }
 

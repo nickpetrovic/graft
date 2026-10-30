@@ -45,13 +45,6 @@ public enum ModSupport: Sendable, Hashable {
             }
         }
 
-        public var modFormats: String? {
-            switch self {
-            case .tksharp: "zip, 7z, rar or tkcl files, or folders with romfs or exefs inside"
-            case .files: ".pak files, zip, 7z or rar files, or folders with romfs or .pak files inside"
-            case .unsupported: nil
-            }
-        }
     }
 
     public var kind: Kind {
@@ -59,6 +52,15 @@ public enum ModSupport: Sendable, Hashable {
         case .tksharp: .tksharp
         case .files: .files
         case .unsupported: .unsupported
+        }
+    }
+
+    public var modFormats: String? {
+        switch self {
+        case .tksharp: "zip, 7z, rar or tkcl files, or folders with romfs or exefs inside"
+        case .files(let settings) where settings.pakFolder == nil: "zip, 7z or rar files, or folders with romfs inside"
+        case .files: ".pak files, zip, 7z or rar files, or folders with romfs or .pak files inside"
+        case .unsupported: nil
         }
     }
 
@@ -201,12 +203,12 @@ public struct FileModSettings: ModEngineSettings {
     public static let defaultPython = "venv/bin/python"
     public static let defaultAppGameFolder = "Contents/Resources/game"
 
-    public var pakFolder: String
+    public var pakFolder: String?
     public var manifestScript: String
     public var python: String
     public var appGameFolder: String
 
-    public init(pakFolder: String = "", manifestScript: String = "", python: String = Self.defaultPython,
+    public init(pakFolder: String? = nil, manifestScript: String = "", python: String = Self.defaultPython,
                 appGameFolder: String = Self.defaultAppGameFolder) {
         self.pakFolder = pakFolder
         self.manifestScript = manifestScript
@@ -216,10 +218,18 @@ public struct FileModSettings: ModEngineSettings {
 
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(pakFolder: try container.decode(String.self, forKey: .pakFolder),
+        self.init(pakFolder: try container.decodeIfPresent(String.self, forKey: .pakFolder).flatMap { $0.isEmpty ? nil : $0 },
                   manifestScript: try container.decode(String.self, forKey: .manifestScript),
                   python: try container.decodeIfPresent(String.self, forKey: .python) ?? Self.defaultPython,
                   appGameFolder: try container.decodeIfPresent(String.self, forKey: .appGameFolder) ?? Self.defaultAppGameFolder)
+    }
+
+    public var pythonIsFullPath: Bool { python.hasPrefix("/") || python.hasPrefix("~") }
+
+    public func python(in workFolder: URL) -> URL {
+        pythonIsFullPath
+            ? URL(fileURLWithPath: (python as NSString).expandingTildeInPath)
+            : workFolder.appending(path: python)
     }
 
     public var requiredFiles: [GameDefinition.FileSetting.Role] { [.gameApp, .workFolder] }
@@ -230,9 +240,8 @@ public struct FileModSettings: ModEngineSettings {
 
     public func problems() -> [String] {
         var problems: [String] = []
-        if pakFolder.isEmpty { problems.append("Choose where loose .pak files go, so mods that are only .pak files can be added.") }
         if manifestScript.isEmpty { problems.append("Enter the port's manifest script.") }
-        if python.isEmpty { problems.append("Enter the Python environment the port's build makes.") }
+        if python.isEmpty { problems.append("Enter the Python environment the port's build uses.") }
         if appGameFolder.isEmpty { problems.append("Enter the folder inside the game app that holds the game's files.") }
         return problems
     }

@@ -60,16 +60,18 @@ public struct FileModEngine: ModEngine {
         try fm.createDirectory(at: content, withIntermediateDirectories: true)
         if let found = Self.folders(named: "romfs", in: unpacked).first {
             try fm.moveItem(at: found, to: romfs)
-        } else {
+        } else if let pakFolder = fileMods.pakFolder {
             let paks = Self.files(in: unpacked).filter { Self.pakExtensions.contains($0.pathExtension.lowercased()) }
             guard !paks.isEmpty else {
                 throw GraftError("\(path.lastPathComponent) has no romfs folder and no .pak files, so there's nothing in it for \(settings.definition.name).")
             }
-            let target = romfs.appending(path: fileMods.pakFolder, directoryHint: .isDirectory)
+            let target = romfs.appending(path: pakFolder, directoryHint: .isDirectory)
             try fm.createDirectory(at: target, withIntermediateDirectories: true)
             for pak in paks {
                 try fm.moveItem(at: pak, to: target.appending(path: pak.lastPathComponent))
             }
+        } else {
+            throw GraftError("\(path.lastPathComponent) has no romfs folder, so there's nothing in it for \(settings.definition.name).")
         }
         if let owner = KnownGame.owner(of: Self.relativeFiles(in: romfs), addedTo: settings.definition, among: otherGames) {
             throw GraftError("'\(Self.modName(of: path))' is a \(owner.name) mod, so it can't be added to \(settings.definition.name).")
